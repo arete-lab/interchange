@@ -1,7 +1,21 @@
 syntax = "proto3";
+
 package interchange.dex;
 
 option go_package = "interchange/x/dex/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc SendCreatePair (MsgSendCreatePair) returns (MsgSendCreatePairResponse);
+}
+message MsgSendCreatePair {
+  string sourceDenom      = 5;
+  string targetDenom      = 6;
+  string creator          = 1;
+  string port             = 2;
+  string channelID        = 3;
+  uint64 timeoutTimestamp = 4;
+}
+
+message MsgSendCreatePairResponse {}
+
