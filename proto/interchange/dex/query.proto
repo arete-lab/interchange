@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package interchange.dex;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "interchange/dex/params.proto";
+import "interchange/dex/sell_order_book.proto";
 
 option go_package = "interchange/x/dex/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/interchange/dex/params";
+  
+  }
+  
+  // Queries a list of SellOrderBook items.
+  rpc SellOrderBook    (QueryGetSellOrderBookRequest) returns (QueryGetSellOrderBookResponse) {
+    option (google.api.http).get = "/interchange/dex/sell_order_book/{index}";
+  
+  }
+  rpc SellOrderBookAll (QueryAllSellOrderBookRequest) returns (QueryAllSellOrderBookResponse) {
+    option (google.api.http).get = "/interchange/dex/sell_order_book";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetSellOrderBookRequest {
+  string index = 1;
+}
+
+message QueryGetSellOrderBookResponse {
+  SellOrderBook sellOrderBook = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSellOrderBookRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllSellOrderBookResponse {
+  repeated SellOrderBook                          sellOrderBook = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination    = 2;
+}
+
