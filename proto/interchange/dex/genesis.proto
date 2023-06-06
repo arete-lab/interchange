@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package interchange.dex;
+
+import "gogoproto/gogo.proto";
+import "interchange/dex/params.proto";
+
+option go_package = "interchange/x/dex/types";
+
+// GenesisState defines the dex module's genesis state.
+message GenesisState {
+  Params params  = 1 [(gogoproto.nullable) = false];
+  string port_id = 2;
+}
+

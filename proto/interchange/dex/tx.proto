@@ -1,0 +1,7 @@
+syntax = "proto3";
+package interchange.dex;
+
+option go_package = "interchange/x/dex/types";
+
+// Msg defines the Msg service.
+service Msg {}
