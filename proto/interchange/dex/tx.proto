@@ -6,9 +6,10 @@ option go_package = "interchange/x/dex/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc SendCreatePair (MsgSendCreatePair) returns (MsgSendCreatePairResponse);
-  rpc SendSellOrder  (MsgSendSellOrder ) returns (MsgSendSellOrderResponse );
-  rpc SendBuyOrder   (MsgSendBuyOrder  ) returns (MsgSendBuyOrderResponse  );
+  rpc SendCreatePair  (MsgSendCreatePair ) returns (MsgSendCreatePairResponse );
+  rpc SendSellOrder   (MsgSendSellOrder  ) returns (MsgSendSellOrderResponse  );
+  rpc SendBuyOrder    (MsgSendBuyOrder   ) returns (MsgSendBuyOrderResponse   );
+  rpc CancelSellOrder (MsgCancelSellOrder) returns (MsgCancelSellOrderResponse);
 }
 message MsgSendCreatePair {
   string sourceDenom      = 5;
@@ -46,4 +47,15 @@ message MsgSendBuyOrder {
 }
 
 message MsgSendBuyOrderResponse {}
+
+message MsgCancelSellOrder {
+  string creator     = 1;
+  string port        = 2;
+  string channel     = 3;
+  string amountDenom = 4;
+  string priceDenom  = 5;
+  int32  orderID     = 6;
+}
+
+message MsgCancelSellOrderResponse {}
 

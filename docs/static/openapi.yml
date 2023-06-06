@@ -71781,6 +71781,8 @@ definitions:
         type: string
       priceDenom:
         type: string
+  interchange.dex.MsgCancelSellOrderResponse:
+    type: object
   interchange.dex.MsgSendBuyOrderResponse:
     type: object
   interchange.dex.MsgSendCreatePairResponse:
