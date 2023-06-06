@@ -10,6 +10,7 @@ service Msg {
   rpc SendSellOrder   (MsgSendSellOrder  ) returns (MsgSendSellOrderResponse  );
   rpc SendBuyOrder    (MsgSendBuyOrder   ) returns (MsgSendBuyOrderResponse   );
   rpc CancelSellOrder (MsgCancelSellOrder) returns (MsgCancelSellOrderResponse);
+  rpc CancelBuyOrder  (MsgCancelBuyOrder ) returns (MsgCancelBuyOrderResponse );
 }
 message MsgSendCreatePair {
   string sourceDenom      = 5;
@@ -58,4 +59,15 @@ message MsgCancelSellOrder {
 }
 
 message MsgCancelSellOrderResponse {}
+
+message MsgCancelBuyOrder {
+  string creator     = 1;
+  string port        = 2;
+  string channel     = 3;
+  string amountDenom = 4;
+  string priceDenom  = 5;
+  int32  orderID     = 6;
+}
+
+message MsgCancelBuyOrderResponse {}
 
